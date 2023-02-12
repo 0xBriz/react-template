@@ -1,0 +1,41 @@
+query GetUserData {
+  balances: userGetPoolBalances {
+    poolId
+    tokenAddress
+    tokenPrice
+    totalBalance
+    stakedBalance
+    walletBalance
+  }
+  staking: userGetStaking {
+    id
+    type
+    address
+    gauge {
+      id
+      gaugeAddress
+      rewards {
+        id
+        rewardPerSecond
+        tokenAddress
+      }
+    }
+  }
+}
+
+query GetUserVeLockInfo {
+  userGetVeLockInfo {
+    lockedAmount
+    lockEndDate
+    totalSupply
+    currentBalance
+    epoch
+    hasExistingLock
+    isExpired
+    percentOwned
+  }
+}
+
+mutation UserSyncBalance($poolId: String!) {
+  userSyncBalance(poolId: $poolId)
+}
